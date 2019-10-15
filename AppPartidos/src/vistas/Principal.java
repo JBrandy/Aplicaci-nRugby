@@ -47,7 +47,7 @@ public class Principal extends Application {
 		FileOutputStream fos = null;
     	 ObjectOutputStream oos = null;
     	 try {
-			 fos= new FileOutputStream("src\\bbdd.dat", true);
+			 fos= new FileOutputStream("src\\bbdd.dat");
 			 oos = new ObjectOutputStream(fos);
 			 
 			  oos.writeObject(Logica.getInstance().listapartidosTotal());
