@@ -85,6 +85,7 @@ public class Principal extends Application {
         
         	  List<Partido> partidos1 =(List<Partido>) ois.readObject(); //
               Logica.getInstance().listapartidosTotal().addAll(partidos1);
+              Logica.getInstance().getListapartidos().addAll(partidos1);
         	 
         	
           }
