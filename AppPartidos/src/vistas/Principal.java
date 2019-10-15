@@ -36,19 +36,18 @@ public class Principal extends Application {
     public static void main(String[] args)  {
     	
     	  
-    	leerFichero();
-    	cargarFichero();
-		
+
+        leerFichero();
         launch(args);
         cargarFichero();
-      
+
     }
 
 	public static void cargarFichero() {
 		FileOutputStream fos = null;
     	 ObjectOutputStream oos = null;
     	 try {
-			 fos= new FileOutputStream("/bbdd.dat", true);
+			 fos= new FileOutputStream("src\\bbdd.dat", true);
 			 oos = new ObjectOutputStream(fos);
 			 
 			  oos.writeObject(Logica.getInstance().listapartidosTotal());
@@ -81,7 +80,7 @@ public class Principal extends Application {
 
           try {
            
-        	  fis = new FileInputStream("/bbdd.dat");
+        	  fis = new FileInputStream("src\\bbdd.dat");
         	  ois = new ObjectInputStream(fis);
         
         	  List<Partido> partidos1 =(List<Partido>) ois.readObject(); //
@@ -107,7 +106,7 @@ public class Principal extends Application {
     public void start(Stage primaryStage) throws Exception {
         Stage stage = new Stage();
         stage.setTitle("Aplicacion de Rugby");
-        Button bt_anadir = new Button("Añadir");
+        Button bt_anadir = new Button("Aï¿½adir");
 
         bt_anadir.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
