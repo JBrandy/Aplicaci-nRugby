@@ -25,13 +25,17 @@ public class Borrar extends VistaTabla {
 				Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 				alert.setTitle("Esta a punto de borrar un registro");
 				alert.setHeaderText("En caso de que borro este registro no se recuperara");
-				alert.setContentText("¿Seguro que quiere borrar el registro?");
+				alert.setContentText("ï¿½Seguro que quiere borrar el registro?");
 
 				alert.showAndWait();
 				if ((alert.getResult() == ButtonType.OK)) {
 
 					Logica.getInstance()
 							.getListapartidos()
+							.remove(tableViewPartidos.getSelectionModel()
+									.getSelectedIndex());
+					Logica.getInstance()
+							.listapartidosTotal()
 							.remove(tableViewPartidos.getSelectionModel()
 									.getSelectedIndex());
 				}
