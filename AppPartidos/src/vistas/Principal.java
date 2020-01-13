@@ -51,7 +51,7 @@ public class Principal extends Application {
 			 oos = new ObjectOutputStream(fos);
 			 
 			  oos.writeObject(Logica.getInstance().listapartidosTotal());
-		       oos.flush();
+			  oos.flush();
 			 
 			 
 		} catch (FileNotFoundException e) {
