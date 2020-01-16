@@ -6,6 +6,7 @@ import javafx.beans.property.*;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -13,8 +14,8 @@ import java.util.TimerTask;
 public class Temporizador extends Label {
 
     private IntegerProperty second = new SimpleIntegerProperty(0);
-    private ObjectProperty<Color> colorEncendido = new SimpleObjectProperty<>(Color.GREEN);
-    private ObjectProperty<Color> colorFin = new SimpleObjectProperty<>(Color.RED);
+    private ObjectProperty<Paint> colorEncendido = new SimpleObjectProperty<>(Color.GREEN);
+    private ObjectProperty<Paint> colorFin = new SimpleObjectProperty<>(Color.RED);
     private StringProperty texto = new SimpleStringProperty("Fin");
     private FinCuentaAtras finCuentaAtras;
 
@@ -49,27 +50,27 @@ public class Temporizador extends Label {
         setText(Integer.toString(second));
     }
 
-    public Color getColorEncendido() {
+    public Paint getColorEncendido() {
         return colorEncendido.get();
     }
 
-    public ObjectProperty<Color> colorEncendidoProperty() {
+    public ObjectProperty<Paint> colorEncendidoProperty() {
         return colorEncendido;
     }
 
-    public void setColorEncendido(Color colorEncendido) {
+    public void setColorEncendido(Paint colorEncendido) {
         this.colorEncendido.set(colorEncendido);
     }
 
-    public Color getColorFin() {
+    public Paint getColorFin() {
         return colorFin.get();
     }
 
-    public ObjectProperty<Color> colorFinProperty() {
+    public ObjectProperty<Paint> colorFinProperty() {
         return colorFin;
     }
 
-    public void setColorFin(Color colorFin) {
+    public void setColorFin(Paint colorFin) {
         this.colorFin.set(colorFin);
     }
 
@@ -91,14 +92,14 @@ public class Temporizador extends Label {
     }
 
 
-   private String colorToString(Color color){
+   private String colorToString(Paint color){
         return color.toString().substring(2);
     }
 
     public void startSec (){
         Timer timer = new Timer();
 
-        setStyle("-fx-background-color:#"+String.format("%02x%02x%02x",(int)(colorEncendido.get().getRed()*255), (int)(colorEncendido.get().getGreen()*255),(int) (colorEncendido.get().getBlue()*255)));
+        setStyle("-fx-background-color:#"+colorToString(colorEncendido.get()));
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
