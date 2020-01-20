@@ -1,33 +1,36 @@
 package textFieldSpi;
 
-import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.TextField;
 
 import java.io.*;
+
 import java.util.*;
 
 public class TextFieldSpy extends TextField {
 
-    private StringProperty palabra = new SimpleStringProperty();
     private String ficheroLog ;
     private List <String> lista = new ArrayList<>();
-    private SimpleTimeZone fecha;
+    private Date fecha;
+    private Evento evento;
 
     public TextFieldSpy() {
+
         textProperty().addListener((observable, oldValue, newValue) -> {
             for (String nombre : lista) {
-                if(nombre.equalsIgnoreCase(palabra.get())){
+                if(getText().contains(nombre)){
+                    //if(nombre.equalsIgnoreCase(getText()))
                     writeFich(nombre);
+                    if(evento!=null){
+                        evento.ejecuta();
+                    }
                 }
             }
 
         });
 
     }
-
-
     public TextFieldSpy(String s) {
         super(s);
 
@@ -45,18 +48,20 @@ public class TextFieldSpy extends TextField {
         lista.add(texto);
     }
 
-
     private void writeFich(String nombre) {
-        PrintWriter fw = null;
+        FileWriter fw;
+        PrintWriter pw = null;
+        fecha = new Date();
         try {
-            fw = new PrintWriter(ficheroLog));
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(nombre);
-            bw.newLine();
-            bw.write(fecha.toString());
+            fw = new FileWriter(ficheroLog, true);
+            pw = new PrintWriter(fw);
+            pw.println(nombre + fecha.toString());
         } catch (IOException e) {
             e.printStackTrace();
-            fw.close();
         }
+        pw.close();
+    }
+    public void addEvento (Evento evento){
+        this.evento = evento;
     }
 }
