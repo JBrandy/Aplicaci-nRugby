@@ -16,46 +16,43 @@ public class Boton extends Button {
     private char segundaPulsacion = ' ';
 
 
-
     public Boton() {
         // Aqui detecto cuando pulso
         setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                 inicio = System.currentTimeMillis();
+                inicio = System.currentTimeMillis();
             }
         });
-    //Aqui detecto cuando suelto
+        //Aqui detecto cuando suelto
         setOnMouseReleased(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 // Insertar aquí el código a ejecutar cuando se suelte el ratón
                 long fin = System.currentTimeMillis();
                 tiempo = fin - inicio;
-                if (tiempo<duracionPulsacionCorta && primeraPulsacion ==' '){
+                if (tiempo < duracionPulsacionCorta && primeraPulsacion == ' ') {
 
-                    primeraPulsacion='C';
+                    primeraPulsacion = 'C';
                     System.out.println(primeraPulsacion);
-                }
-                else if (tiempo<duracionPulsacionCorta && segundaPulsacion ==' ' && (primeraPulsacion =='C' || primeraPulsacion =='L' )){
+                } else if (tiempo < duracionPulsacionCorta && segundaPulsacion == ' ' && (primeraPulsacion == 'C' || primeraPulsacion == 'L')) {
 
-                    segundaPulsacion='C';
+                    segundaPulsacion = 'C';
                     System.out.println(segundaPulsacion);
-                }
-                else if (tiempo>duracionPulsacionCorta && tiempo<duraciónPulsaciónLarga && primeraPulsacion ==' ' ){
-                    primeraPulsacion='L';
+                } else if (tiempo > duracionPulsacionCorta && tiempo < duraciónPulsaciónLarga && primeraPulsacion == ' ') {
+                    primeraPulsacion = 'L';
                     System.out.println(primeraPulsacion);
 
-                }
-                else if (tiempo>duracionPulsacionCorta && tiempo<duraciónPulsaciónLarga && segundaPulsacion ==' ' && (primeraPulsacion =='C' || primeraPulsacion =='L' )){
-                    segundaPulsacion='L';
+                } else if (tiempo > duracionPulsacionCorta && tiempo < duraciónPulsaciónLarga && segundaPulsacion == ' ' && (primeraPulsacion == 'C' || primeraPulsacion == 'L')) {
+                    segundaPulsacion = 'L';
                     System.out.println(segundaPulsacion);
 
-                } else if (primeraPulsacion !=' ' && segundaPulsacion !=' '){
-                   char letra = comprobar();
-                   // poner listener
-                }
-                else{
+                } else if (primeraPulsacion != ' ' && segundaPulsacion != ' ') {
+                   // char letra = comprobar();
+                    // poner listener(pablo) ara mi accion que resaliza cuando detecta algo  codigo no se ejecuta hasta que el usuar
+                    if(evento!=null)
+                     evento.ejecuta(comprobar());
+                } else {
 
                 }
 
@@ -64,23 +61,19 @@ public class Boton extends Button {
     }
 
 
-
-    public char comprobar() {
-        if(primeraPulsacion=='C' && segundaPulsacion=='C'){
+    private char comprobar() {
+        if (primeraPulsacion == 'C' && segundaPulsacion == 'C') {
 
             return 'i';
-        }
-        else if (primeraPulsacion=='L' && segundaPulsacion=='L'){
+        } else if (primeraPulsacion == 'L' && segundaPulsacion == 'L') {
 
             return 'M';
-        }
-        else if (primeraPulsacion=='C' && segundaPulsacion=='L'){
+        } else if (primeraPulsacion == 'C' && segundaPulsacion == 'L') {
 
             return 'A';
-        }
-        else
-        primeraPulsacion= ' ';
-        segundaPulsacion= ' ';
+        } else
+            primeraPulsacion = ' ';
+        segundaPulsacion = ' ';
         return 'N';
     }
 
@@ -93,5 +86,9 @@ public class Boton extends Button {
     }
 
 
+    // metodo de acceso al usuario al interfaz
+  public void addEvento (Evento evento){
+      this.evento = evento;
+  }
 
 }

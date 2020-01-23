@@ -1,6 +1,7 @@
 package prueba;
 
 import brandy.Boton;
+import brandy.Evento;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -19,15 +20,17 @@ public class Prueba extends Application {
         Boton componente = new Boton();
 
 
-        /*
+
           componente.addEvento(new Evento() {
-            @Override
-            public void ejecuta() {
-                Label etiqueta = new Label("Hey");
-                vBox.getChildren().add(etiqueta);
-            }
+              @Override
+              public void ejecuta(char letra) {
+                  Label etiqueta = new Label("hey");
+                  System.out.println(letra);
+                  vBox.getChildren().add(etiqueta);
+              }
+
         });
-         */
+
 
 
         vBox.getChildren().addAll(componente);
